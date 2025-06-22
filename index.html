@@ -1,48 +1,9 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Razib Hossain - Portfolio</title>
+    <title>Md. Razib Hossain - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -59,7 +20,7 @@
     <!-- Home Section -->
     <section id="home">
         <h1>Welcome to My Portfolio</h1>
-        <p>Hi, I'm Razib Hossain, a Technical Project Manager.</p>
+        <p>Hi, I'm Md. Razib Hossain, a PMP-certified Deputy Manager specializing in ERP, Project Management, and Business Analysis.</p>
         <img src="profile.jpg" alt="Profile Picture" class="profile-img">
     </section>
 
@@ -68,14 +29,19 @@
         <h2>My Projects</h2>
         <div class="project-grid">
             <div class="project-card">
-                <h3>Project 1</h3>
-                <p>Description of your first project. [Add details].</p>
-                <a href="[Project Link]" target="_blank">View Project</a>
+                <h3>ERP Implementation at Epyllion Group</h3>
+                <p>Led the design and development of enterprise-level ERP solutions as Core Domain Architect, ensuring alignment with business objectives.</p>
+                <a href="#" target="_blank">View Details</a>
             </div>
             <div class="project-card">
-                <h3>Project 2</h3>
-                <p>Description of your second project. [Add details].</p>
-                <a href="[Project Link]" target="_blank">View Project</a>
+                <h3>High-Profile System Development</h3>
+                <p>Guided the development and modification of systems for a high-profile project at Epyllion Group, managing full project lifecycle.</p>
+                <a href="#" target="_blank">View Details</a>
+            </div>
+            <div class="project-card">
+                <h3>Business Process Optimization at Meghna Group</h3>
+                <p>Engaged with business teams to gather requirements and translated them into functional specifications for ERP implementation.</p>
+                <a href="#" target="_blank">View Details</a>
             </div>
         </div>
     </section>
@@ -84,24 +50,29 @@
     <section id="skills">
         <h2>My Skills</h2>
         <ul class="skills-list">
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>[Add Your Skill]</li>
+            <li>Project Management</li>
+            <li>Business Analysis</li>
+            <li>ERP Implementation</li>
+            <li>Data Management & Analysis</li>
+            <li>Software Implementation</li>
+            <li>Management Information Systems</li>
+            <li>Process Improvement</li>
+            <li>Stakeholder Communication</li>
         </ul>
     </section>
 
     <!-- Contact Section -->
     <section id="contact">
         <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:ahmedrazib08@gmail.com">ahmedrazib08@gmail.com</a></p>
-        <p>LinkedIn: <a href="www.linkedin.com/in/razib-hossain" target="_blank">LinkedIn Profile</a></p>
-        <p>GitHub: <a href="https://github.com/EpyRazib/razib" target="_blank">GitHub Profile</a></p>
+        <p>Email: <a href="mailto:ahmedrazib@gmail.com">ahmedrazib@gmail.com</a></p>
+        <p>Phone: <a href="tel:+8801734503977">+8801734503977</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/razib-hossain" target="_blank">LinkedIn Profile</a></p>
+        <p>GitHub: <a href="#" target="_blank">GitHub Profile</a></p>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Razib Hossain. All rights reserved.</p>
+        <p>© 2025 Md. Razib Hossain. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
